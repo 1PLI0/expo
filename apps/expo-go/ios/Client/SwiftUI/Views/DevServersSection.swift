@@ -20,6 +20,11 @@ struct DevServersSection: View {
         if !viewModel.developmentServers.isEmpty {
           ForEach(viewModel.developmentServers) { server in
             DevServerRow(server: server) {
+              viewModel.addToRecentlyOpened(
+                url: server.url,
+                name: server.description,
+                iconUrl: server.iconUrl
+              )
               viewModel.openApp(url: server.url)
             }
           }
@@ -123,6 +128,7 @@ struct DevServersSection: View {
         }
         .disabled(urlText.isEmpty)
         .buttonStyle(PlainButtonStyle())
+
       }
     }
     .animation(.easeInOut, value: showingURLInput)
@@ -150,4 +156,5 @@ struct DevServersSection: View {
     troubleshootingMessage = message
     showingTroubleshootingAlert = true
   }
+
 }
