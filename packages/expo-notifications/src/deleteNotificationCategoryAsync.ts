@@ -11,7 +11,7 @@ import NotificationCategoriesModule from './NotificationCategoriesModule';
  * @platform ios
  * @header categories
  */
-export default async function deleteNotificationCategoryAsync(
+export async function deleteNotificationCategoryAsync(
   identifier: string
 ): Promise<boolean> {
   if (!NotificationCategoriesModule.deleteNotificationCategoryAsync) {

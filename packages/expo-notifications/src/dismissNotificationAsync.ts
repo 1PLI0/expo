@@ -8,7 +8,7 @@ import NotificationPresenter from './NotificationPresenterModule';
  * @return A Promise which resolves once the request to dismiss the notification is successfully dispatched to the notifications manager.
  * @header dismiss
  */
-export default async function dismissNotificationAsync(
+export async function dismissNotificationAsync(
   notificationIdentifier: string
 ): Promise<void> {
   if (!NotificationPresenter.dismissNotificationAsync) {
