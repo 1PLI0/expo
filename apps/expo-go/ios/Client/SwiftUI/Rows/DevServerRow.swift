@@ -5,7 +5,7 @@ import SwiftUI
 struct DevServerRow: View {
   let server: DevelopmentServer
   let onTap: () -> Void
-  
+
   var body: some View {
     Button {
       onTap()
@@ -13,19 +13,19 @@ struct DevServerRow: View {
     label: {
       HStack {
         DevServerIcon(source: server.source, iconUrl: server.iconUrl)
-        
+
         VStack(alignment: .leading, spacing: 2) {
           Text(server.description.isEmpty ? server.url : server.description)
             .fontWeight(.semibold)
             .foregroundColor(.primary)
-          
+
           if server.description != server.url {
             Text(server.url)
               .font(.caption)
               .foregroundColor(.secondary)
           }
         }
-        
+
         Spacer()
         Image(systemName: "chevron.right")
           .font(.caption)
@@ -43,11 +43,11 @@ private struct DevServerIcon: View {
   let source: String
   let iconUrl: String?
   @Environment(\.colorScheme) private var colorScheme
-  
+
   var body: some View {
     let background = colorScheme == .dark ? Color.expoSecondarySystemGroupedBackground : Color.white
     let imageName = source == "snack" ? "snack" : "cli"
-    
+
     RemoteIconView(iconUrl: iconUrl, fallbackImageName: imageName)
       .frame(width: 28, height: 28)
       .padding(10)
@@ -65,7 +65,7 @@ private struct RemoteIconView: View {
   let fallbackImageName: String
   @State private var image: UIImage?
   @State private var isLoading = false
-  
+
   var body: some View {
     Group {
       if let image {
@@ -84,13 +84,13 @@ private struct RemoteIconView: View {
       await loadImageIfNeeded()
     }
   }
-  
+
   private func loadImageIfNeeded() async {
     guard let iconUrl, let url = URL(string: iconUrl), !isLoading else {
       return
     }
     isLoading = true
-    
+
     do {
       let config = URLSessionConfiguration.ephemeral
       config.protocolClasses = []
